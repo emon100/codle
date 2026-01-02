@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuiz } from './QuizContext';
 import Layout from './components/Layout';
 import ShareCard from './components/ShareCard';
+import MarkdownText from './components/MarkdownText';
 import './App.css';
 
 const Home = () => {
@@ -92,7 +93,9 @@ const Quiz = () => {
           <span>{currentQuestion.category[lang]}</span>
           <span>{currentQuestion.difficulty}</span>
         </div>
-        <div className="question-text">{currentQuestion.question[lang]}</div>
+        <div className="question-text">
+          <MarkdownText>{currentQuestion.question[lang]}</MarkdownText>
+        </div>
 
         <div className="options-list">
           {currentQuestion.options[lang].map((option, index) => {
@@ -120,7 +123,7 @@ const Quiz = () => {
         {showExplanation && (
           <div className="explanation-box">
             <h4>{t('explanation')}</h4>
-            <p>{currentQuestion.explanation[lang]}</p>
+            <MarkdownText>{currentQuestion.explanation[lang]}</MarkdownText>
             <button className="btn-primary next-btn" onClick={handleNext}>
               {currentIndex + 1 === questions.length ? t('see_results') : t('next')}
             </button>
