@@ -1,9 +1,9 @@
 # Github Pages Deployment Workflow (deployment.md)
 
-To deploy **BitBite** to GitHub Pages, follow these steps:
+To deploy **Codle** to GitHub Pages using the **native GitHub Actions** approach (without a separate branch), follow these steps:
 
-## 1. Automated Deployment (GitHub Actions)
-Create a file at `.github/workflows/deploy.yml` with the following content. This will automatically deploy your app whenever you push to the `main` branch.
+## 1. GitHub Actions Workflow
+Ensure your file at `.github/workflows/deploy.yml` contains the following. This uses official actions to build and deploy directly.
 
 ```yaml
 name: Deploy to GitHub Pages
@@ -11,43 +11,63 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-
       - name: Install and Build
         run: |
           npm install
           npm run build
-
-      - name: Deploy
-        uses: jamesives/github-pages-deploy-action@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: dist
-          branch: gh-pages
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 ```
 
-## 2. Vite Configuration
-Ensure your `vite.config.js` includes the `base` property if you are deploying to a sub-path (e.g., `https://username.github.io/repo-name/`).
+## 2. GitHub Repository Settings
+1. Go to your GitHub repository -> **Settings** -> **Pages**.
+2. Under **Build and deployment** -> **Source**, select **GitHub Actions**. 
+   > [!IMPORTANT]
+   > This is the critical step to tell GitHub to use the workflow instead of a branch.
+
+## 3. Vite Configuration
+Ensure `vite.config.js` has the correct `base` path if your app is hosted at a subfolder (e.g., `/codle/`). For the root of a domain, use `'/'`.
 
 ```javascript
 export default defineConfig({
   plugins: [react()],
-  base: '/programming-quiz/', // Change this to your repo name!
+  base: './', // Using relative paths is often the safest for Pages
 })
 ```
-
-## 3. GitHub Repository Settings
-1. Go to your GitHub repository -> **Settings** -> **Pages**.
-2. Under **Build and deployment** -> **Source**, select **Deploy from a branch**.
-3. Select `gh-pages` and folder `/ (root)`.
