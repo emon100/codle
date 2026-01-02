@@ -1,0 +1,281 @@
+[
+  {
+    "id": "js-weird-1",
+    "category": {
+      "en": "JavaScript",
+      "cn": "JavaScript"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "What is the output of `[] + []`?",
+      "cn": "`[] + []` 的输出结果是什么？"
+    },
+    "options": {
+      "en": [
+        "\"\"",
+        "[]",
+        "undefined",
+        "NaN"
+      ],
+      "cn": [
+        "\"\"",
+        "[]",
+        "undefined",
+        "NaN"
+      ]
+    },
+    "answer": 0,
+    "explanation": {
+      "en": "In JS, the `+` operator triggers string conversion for objects. An empty array becomes an empty string. `\"\" + \"\"` results in `\"\"`. Pro tip: In a real codebase, if you see someone adding arrays, it's either a very weird hack or a bug. Check their coffee levels.",
+      "cn": "在 JS 中，`+` 运算符会触发对象的字符串转换。空数组转换为空字符串。`\"\" + \"\"` 结果就是 `\"\"`。提示：在实际代码库中，如果你看到有人在加数组，要么这是一种极度怪异的技巧，要么是个 Bug。建议去看看他的咖啡是不是喝多了。"
+    }
+  },
+  {
+    "id": "js-logic-1",
+    "category": {
+      "en": "JavaScript",
+      "cn": "JavaScript"
+    },
+    "difficulty": "Hard",
+    "question": {
+      "en": "What does `0.1 + 0.2 === 0.3` return?",
+      "cn": "`0.1 + 0.2 === 0.3` 会返回什么？"
+    },
+    "options": {
+      "en": [
+        "true",
+        "false",
+        "undefined",
+        "TypeError"
+      ],
+      "cn": [
+        "true",
+        "false",
+        "undefined",
+        "TypeError"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "IEEE 754 floating-point math! `0.1 + 0.2` actually equals `0.30000000000000004` due to binary precision limits. This is why you should always use epsilon comparisons or integer math for money. Don't let floating points buy you a ticket to a financial disaster.",
+      "cn": "这就是著名的 IEEE 754 浮点数陷阱！由于二进制精度的局限性，`0.1 + 0.2` 实际上等于 `0.30000000000000004`。这就是为什么在处理金钱时你应该总是使用 epsilon 比较或者直接用整数。别让浮点数把你带进财务灾难的大坑。"
+    }
+  },
+  {
+    "id": "css-perf-1",
+    "category": {
+      "en": "CSS Performance",
+      "cn": "CSS 性能"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "Which of these CSS changes is most likely to trigger a 'Layout' (Reflow) event?",
+      "cn": "以下哪种 CSS 更改最有可能触发“布局”(Reflow) 事件？"
+    },
+    "options": {
+      "en": [
+        "opacity",
+        "transform",
+        "width",
+        "color"
+      ],
+      "cn": [
+        "opacity",
+        "transform",
+        "width",
+        "color"
+      ]
+    },
+    "answer": 2,
+    "explanation": {
+      "en": "Modifying `width` affects the geometry of the element and its neighbors, forcing the browser to recalculate the layout. `transform` and `opacity` are much 'cheaper' as they only trigger Compositing. High-performance animations should stick to the 'cheap' properties whenever possible.",
+      "cn": "修改 `width` 会直接影响元素及其邻居的几何形状，迫使浏览器重新计算布局。相比之下，`transform` 和 `opacity` 要“廉价”得多，因为它们通常只触发合成（Compositing）。高性能的动画应尽可能使用这些“廉价”属性。"
+    }
+  },
+  {
+    "id": "hw-mem-1",
+    "category": {
+      "en": "System Architecture",
+      "cn": "系统架构"
+    },
+    "difficulty": "Hard",
+    "question": {
+      "en": "Why is accessing elements in a contiguous array usually faster than in a linked list for the same number of elements?",
+      "cn": "为什么对于相同数量的元素，访问连续数组中的元素通常比访问链表中的元素更快？"
+    },
+    "options": {
+      "en": [
+        "Arrays use less memory",
+        "CPU Cache Locality",
+        "Linked lists are older",
+        "Arrays are built-in"
+      ],
+      "cn": [
+        "数组占用内存更少",
+        "CPU 缓存局部性",
+        "链表是过时的技术",
+        "数组是内置的"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "Cache locality! CPUs pull data from RAM into fast caches in blocks (Cache Lines). Since arrays are contiguous, accessing the next element likely finds it already in the cache. Linked list nodes can be anywhere in RAM, leading to frequent 'Cache Misses'. Memory access speed is often the real bottleneck in modern software.",
+      "cn": "缓存局部性（Cache Locality）！CPU 从内存（RAM）读取数据到快速缓存时是按块（Cache Lines）读取的。由于数组是连续存储的，访问下一个元素时它很可能已经在缓存中了。而链表节点分布在内存的任何地方，会导致频繁的“缓存未命中”。在现代软件中，内存访问速度往往才是真正的瓶颈。"
+    }
+  },
+  {
+    "id": "js-this-1",
+    "category": {
+      "en": "JavaScript",
+      "cn": "JavaScript"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "In a non-arrow function, what is `this` if the function is called as `obj.func()`?",
+      "cn": "在非箭头函数中，如果以 `obj.func()` 的形式调用，`this` 指向什么？"
+    },
+    "options": {
+      "en": [
+        "The global object",
+        "undefined",
+        "obj",
+        "The function itself"
+      ],
+      "cn": [
+        "全局对象",
+        "undefined",
+        "obj",
+        "函数本身"
+      ]
+    },
+    "answer": 2,
+    "explanation": {
+      "en": "The object before the dot! This is the fundamental 'method call' binding. But beware: once you extract that function (`const f = obj.func`) and call `f()`, `this` might change to the global object or undefined. `this` in JS is like a cat: it changes its mind depending on where it's sitting.",
+      "cn": "点号前面的那个对象！这是最基本的“方法调用”绑定。但要注意：一旦你把那个函数提取出来（比如 `const f = obj.func`）然后再调用 `f()`，`this` 可能会变成全局对象或 undefined。JS 里的 `this` 就像只猫：它坐在哪，它的心思就在哪。"
+    }
+  },
+  {
+    "id": "css-bfc-1",
+    "category": {
+      "en": "CSS",
+      "cn": "CSS"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "Which of the following operations will NOT trigger a new Block Formatting Context (BFC)?",
+      "cn": "以下哪种操作不会触发一个新的 BFC (块级格式化上下文)？"
+    },
+    "options": {
+      "en": [
+        "overflow: hidden",
+        "float: right",
+        "display: flex",
+        "position: relative"
+      ],
+      "cn": [
+        "overflow: hidden",
+        "float: right",
+        "display: flex",
+        "position: relative"
+      ]
+    },
+    "answer": 3,
+    "explanation": {
+      "en": "BFC is like an 'independent state' for layout. While `position: absolute` or `overflow: hidden` create one, `position: relative` only defines a reference for its children without creating a new BFC themselves.",
+      "cn": "BFC 是排版中的“独立小王国”。overflow 不为 visible、float、或者 position 为 absolute/fixed 都能开启它。虽然 position: relative 很常用，但它本身并不会触发 BFC。"
+    }
+  },
+  {
+    "id": "js-loop-1",
+    "category": {
+      "en": "JavaScript",
+      "cn": "JavaScript"
+    },
+    "difficulty": "Hard",
+    "question": {
+      "en": "In the browser event loop, which statement about microtasks and macrotasks is correct?",
+      "cn": "在浏览器事件循环中，关于微任务和宏任务的执行顺序，正确的是？"
+    },
+    "options": {
+      "en": [
+        "One macrotask is executed, then all pending microtasks are cleared",
+        "Microtasks always execute before any macrotask",
+        "The microtask queue is cleared before every single macrotask",
+        "They execute concurrently in separate threads"
+      ],
+      "cn": [
+        "先执行完一个宏任务，再执行完所有微任务",
+        "微任务总是优先于宏任务执行",
+        "每个宏任务执行前都会清空微任务队列",
+        "两者在不同线程并发执行"
+      ]
+    },
+    "answer": 0,
+    "explanation": {
+      "en": "Think of it this way: one macrotask per tick, then flush *all* microtasks. Between two setTimeouts, the engine will clear every pending Promise.then. Don't block the loop!",
+      "cn": "记住：宏任务一次只吃一个（比如一个 setTimeout），微任务一次吃一堆。在两个宏任务之间，浏览器会清空所有的微任务队列（如 Promise.then）。别堵塞主线程！"
+    }
+  },
+  {
+    "id": "vdom-perf-1",
+    "category": {
+      "en": "Performance",
+      "cn": "性能优化"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "Why is Virtual DOM often considered better for performance than direct DOM manipulation?",
+      "cn": "为什么说虚拟 DOM (Virtual DOM) 通常能提高性能？"
+    },
+    "options": {
+      "en": [
+        "It renders faster than the native browser DOM",
+        "It batches changes and minimizes layout/reflow frequency",
+        "It bypasses the browser's CSS parser",
+        "It uses WebAssembly for calculations"
+      ],
+      "cn": [
+        "它的渲染初速度比原生 DOM 更快",
+        "它通过 Diff 算法减少了对真实 DOM 的重绘和回流次数",
+        "它可以绕过浏览器的 CSS 解析器",
+        "它使用了 WebAssembly 进行计算"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "Virtual DOM isn't faster than the real DOM — it's just smarter. It finds the minimum delta between states and applies it in one go, avoiding 'layout thrashing'.",
+      "cn": "虚拟 DOM 其实并不比真实 DOM 快，它只是更“聪明”。通过 Diff 算法找出最小变更集并批量更新，从而避免了昂贵的重复布局计算。"
+    }
+  },
+  {
+    "id": "net-cache-1",
+    "category": {
+      "en": "Network",
+      "cn": "计算机网络"
+    },
+    "difficulty": "Hard",
+    "question": {
+      "en": "In HTTP negotiated caching, which header pair precisely detects content changes beyond timestamps?",
+      "cn": "关于协商缓存，以下哪个响应头/请求头用于精确判断内容变化（不受时间限制）？"
+    },
+    "options": {
+      "en": [
+        "Cache-Control / Expires",
+        "Last-Modified / If-Modified-Since",
+        "ETag / If-None-Match",
+        "Pragma / No-cache"
+      ],
+      "cn": [
+        "Cache-Control / Expires",
+        "Last-Modified / If-Modified-Since",
+        "ETag / If-None-Match",
+        "Pragma / No-cache"
+      ]
+    },
+    "answer": 2,
+    "explanation": {
+      "en": "Last-Modified only tracks seconds. ETag is a content hash. If you update a file twice in one second, only ETag will save your cache consistency.",
+      "cn": "Last-Modified 只能精确到秒。而 ETag 是内容的指纹（Hash）。如果你在一秒内多次更新同一个文件，只有 ETag 能保证缓存的一致性。"
+    }
+  }
+]
