@@ -2,12 +2,21 @@ import { useQuiz } from '../QuizContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import '../App.css';
 
-const Header = () => (
-    <header className="main-header">
-        <div className="logo gradient-text">Codle</div>
-        <LanguageSwitcher />
-    </header>
-);
+const Header = () => {
+    const { setCurrentMode, resetGame } = useQuiz();
+    return (
+        <header className="main-header">
+            <div
+                className="logo gradient-text"
+                onClick={() => { setCurrentMode(null); resetGame(); }}
+                style={{ cursor: 'pointer' }}
+            >
+                Codle
+            </div>
+            <LanguageSwitcher />
+        </header>
+    );
+};
 
 const Footer = () => {
     const { t } = useQuiz();
