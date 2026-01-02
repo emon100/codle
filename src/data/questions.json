@@ -277,5 +277,377 @@
       "en": "Last-Modified only tracks seconds. ETag is a content hash. If you update a file twice in one second, only ETag will save your cache consistency.",
       "cn": "Last-Modified 只能精确到秒。而 ETag 是内容的指纹（Hash）。如果你在一秒内多次更新同一个文件，只有 ETag 能保证缓存的一致性。"
     }
+  },
+  {
+    "id": "js-closure-1",
+    "category": {
+      "en": "JavaScript",
+      "cn": "JavaScript"
+    },
+    "difficulty": "Hard",
+    "question": {
+      "en": "What will the following code output?\n```js\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n```",
+      "cn": "以下代码会输出什么？\n```js\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n```"
+    },
+    "options": {
+      "en": [
+        "0, 1, 2",
+        "3, 3, 3",
+        "undefined, undefined, undefined",
+        "0, 0, 0"
+      ],
+      "cn": [
+        "0, 1, 2",
+        "3, 3, 3",
+        "undefined, undefined, undefined",
+        "0, 0, 0"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "Classic closure trap! `var` is function-scoped, so all three callbacks share the same `i`. By the time the callbacks execute, the loop has finished and `i` is 3. Fix it with `let` (block-scoped) or an IIFE. This question has ended more interviews than coffee breaks.",
+      "cn": "经典的闭包陷阱！`var` 是函数作用域，所以三个回调共享同一个 `i`。当回调执行时，循环已经结束，`i` 已经是 3 了。用 `let`（块级作用域）或 IIFE 可以解决。这道题结束的面试比午休时间还多。"
+    }
+  },
+  {
+    "id": "sec-cors-1",
+    "category": {
+      "en": "Security",
+      "cn": "安全"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "When making a cross-origin POST request with `Content-Type: application/json`, the browser first sends:",
+      "cn": "当发起一个跨域的 POST 请求且 `Content-Type: application/json` 时，浏览器会先发送："
+    },
+    "options": {
+      "en": [
+        "The POST request directly",
+        "An OPTIONS preflight request",
+        "A GET request to check permissions",
+        "A HEAD request to verify the URL"
+      ],
+      "cn": [
+        "直接发送 POST 请求",
+        "一个 OPTIONS 预检请求",
+        "一个 GET 请求来检查权限",
+        "一个 HEAD 请求来验证 URL"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "CORS preflight! Non-simple requests (like JSON content-type) trigger an OPTIONS request first. The server must respond with appropriate `Access-Control-*` headers. If your API returns 405 for OPTIONS, congrats - you've discovered why your frontend dev is crying.",
+      "cn": "CORS 预检机制！非简单请求（如 JSON 类型）会先触发一个 OPTIONS 请求。服务器必须返回正确的 `Access-Control-*` 头。如果你的 API 对 OPTIONS 返回 405，恭喜你——你发现了前端同事为什么在哭泣。"
+    }
+  },
+  {
+    "id": "sec-xss-1",
+    "category": {
+      "en": "Security",
+      "cn": "安全"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "Which of the following is the MOST effective defense against XSS attacks?",
+      "cn": "以下哪种方式是防御 XSS 攻击最有效的手段？"
+    },
+    "options": {
+      "en": [
+        "Using HTTPS",
+        "Content Security Policy (CSP)",
+        "Input length validation",
+        "Using POST instead of GET"
+      ],
+      "cn": [
+        "使用 HTTPS",
+        "内容安全策略 (CSP)",
+        "输入长度验证",
+        "使用 POST 代替 GET"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "CSP is the nuclear option against XSS! It tells browsers which scripts are allowed to execute. While output encoding is essential, CSP adds a critical defense layer. HTTPS protects transmission, not execution. Length validation? Hackers appreciate your optimism.",
+      "cn": "CSP 是对抗 XSS 的核武器！它告诉浏览器哪些脚本可以执行。虽然输出编码也很重要，但 CSP 提供了关键的防御层。HTTPS 保护的是传输，不是执行。长度验证？黑客很欣赏你的乐观。"
+    }
+  },
+  {
+    "id": "react-hooks-1",
+    "category": {
+      "en": "React",
+      "cn": "React"
+    },
+    "difficulty": "Hard",
+    "question": {
+      "en": "Why can't React Hooks be called inside loops, conditions, or nested functions?",
+      "cn": "为什么 React Hooks 不能在循环、条件语句或嵌套函数中调用？"
+    },
+    "options": {
+      "en": [
+        "It causes memory leaks",
+        "React relies on call order to track hook state",
+        "It conflicts with React's virtual DOM",
+        "Hooks are synchronous only"
+      ],
+      "cn": [
+        "会导致内存泄漏",
+        "React 依赖调用顺序来追踪 hook 状态",
+        "会与 React 的虚拟 DOM 冲突",
+        "Hooks 只支持同步操作"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "React uses a linked list to track hooks, indexed by call order. If you put a hook in an `if` block, the order changes between renders, and React loses track of which state belongs to which hook. It's like numbering your socks - skip one, and chaos ensues.",
+      "cn": "React 使用链表按调用顺序追踪 hooks。如果把 hook 放在 `if` 里，渲染之间顺序会变，React 就不知道哪个状态属于哪个 hook 了。就像给袜子编号——跳过一只，就乱套了。"
+    }
+  },
+  {
+    "id": "ts-type-1",
+    "category": {
+      "en": "TypeScript",
+      "cn": "TypeScript"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "What is the key difference between `interface` and `type` in TypeScript?",
+      "cn": "TypeScript 中 `interface` 和 `type` 的关键区别是什么？"
+    },
+    "options": {
+      "en": [
+        "interface is faster at compile time",
+        "type cannot be extended",
+        "interface can be merged (declaration merging)",
+        "type only works with primitives"
+      ],
+      "cn": [
+        "interface 编译更快",
+        "type 不能被扩展",
+        "interface 支持声明合并",
+        "type 只能用于基本类型"
+      ]
+    },
+    "answer": 2,
+    "explanation": {
+      "en": "Declaration merging! Multiple `interface` declarations with the same name merge into one. `type` cannot do this - redeclaring throws an error. This is why libraries use `interface` for extensibility. Both can extend, both work with objects - the merge capability is the real differentiator.",
+      "cn": "声明合并！同名的多个 `interface` 会合并成一个。`type` 做不到——重复声明会报错。这就是为什么库通常用 `interface` 来提供可扩展性。两者都能扩展，都能用于对象——合并能力才是真正的区别。"
+    }
+  },
+  {
+    "id": "browser-storage-1",
+    "category": {
+      "en": "Browser API",
+      "cn": "浏览器 API"
+    },
+    "difficulty": "Easy",
+    "question": {
+      "en": "What is the main difference between `localStorage` and `sessionStorage`?",
+      "cn": "`localStorage` 和 `sessionStorage` 的主要区别是什么？"
+    },
+    "options": {
+      "en": [
+        "localStorage has larger capacity",
+        "sessionStorage is cleared when the tab closes",
+        "localStorage is synchronous, sessionStorage is async",
+        "sessionStorage works across domains"
+      ],
+      "cn": [
+        "localStorage 容量更大",
+        "sessionStorage 在标签页关闭时清除",
+        "localStorage 是同步的，sessionStorage 是异步的",
+        "sessionStorage 可以跨域使用"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "Session = tab lifetime! `sessionStorage` survives refreshes but dies with the tab. `localStorage` persists until explicitly cleared. Both have ~5MB limit, both are synchronous, both are same-origin. Use sessionStorage for sensitive data you don't want lingering around like that browser tab from 3 weeks ago.",
+      "cn": "Session = 标签页生命周期！`sessionStorage` 刷新后还在，但关闭标签页就没了。`localStorage` 会一直保存直到手动清除。两者都是 ~5MB 限制，都是同步的，都遵循同源策略。敏感数据用 sessionStorage，别让它像三周前没关的标签页一样赖着不走。"
+    }
+  },
+  {
+    "id": "algo-linkedlist-1",
+    "category": {
+      "en": "Algorithm",
+      "cn": "算法"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "When reversing a singly linked list iteratively, what is the minimum number of pointers needed?",
+      "cn": "迭代反转单链表时，最少需要几个指针？"
+    },
+    "options": {
+      "en": [
+        "1 pointer",
+        "2 pointers",
+        "3 pointers",
+        "4 pointers"
+      ],
+      "cn": [
+        "1 个指针",
+        "2 个指针",
+        "3 个指针",
+        "4 个指针"
+      ]
+    },
+    "answer": 2,
+    "explanation": {
+      "en": "You need 3 pointers: `prev`, `curr`, and `next`. Before changing curr.next to prev, you must save curr.next in `next`, otherwise you lose the rest of the list! This is the classic 'don't saw off the branch you're sitting on' problem. Source: Nowcoder TOP101 - BM1 反转链表",
+      "cn": "需要 3 个指针：`prev`、`curr` 和 `next`。在把 curr.next 指向 prev 之前，必须先用 `next` 保存 curr.next，否则链表后面的节点就丢了！这是经典的「别锯掉你坐着的树枝」问题。来源：牛客 TOP101 - BM1 反转链表"
+    }
+  },
+  {
+    "id": "algo-binarysearch-1",
+    "category": {
+      "en": "Algorithm",
+      "cn": "算法"
+    },
+    "difficulty": "Hard",
+    "question": {
+      "en": "In binary search, when should you use `mid = left + (right - left) / 2` instead of `mid = (left + right) / 2`?",
+      "cn": "二分查找中，什么情况下应该用 `mid = left + (right - left) / 2` 而不是 `mid = (left + right) / 2`？"
+    },
+    "options": {
+      "en": [
+        "When the array is sorted in descending order",
+        "When left + right might overflow",
+        "When searching for the first occurrence",
+        "When the array contains negative numbers"
+      ],
+      "cn": [
+        "当数组降序排列时",
+        "当 left + right 可能溢出时",
+        "当需要查找第一个匹配项时",
+        "当数组包含负数时"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "Integer overflow prevention! When left and right are both large (close to INT_MAX), their sum overflows. `left + (right - left) / 2` avoids this by computing the difference first. This bug has crashed production systems and embarrassed senior engineers. Source: Nowcoder TOP101 - Binary Search",
+      "cn": "防止整数溢出！当 left 和 right 都很大（接近 INT_MAX）时，它们的和会溢出。`left + (right - left) / 2` 先算差值就避免了这个问题。这个 bug 曾让生产系统崩溃，也让资深工程师社死。来源：牛客 TOP101 - 二分查找"
+    }
+  },
+  {
+    "id": "algo-dp-1",
+    "category": {
+      "en": "Algorithm",
+      "cn": "算法"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "What is the key difference between 'top-down' (memoization) and 'bottom-up' (tabulation) dynamic programming?",
+      "cn": "「自顶向下」（记忆化）和「自底向上」（制表法）动态规划的关键区别是什么？"
+    },
+    "options": {
+      "en": [
+        "Top-down is always faster",
+        "Bottom-up uses recursion, top-down uses iteration",
+        "Top-down uses recursion with caching, bottom-up fills a table iteratively",
+        "They have different time complexity"
+      ],
+      "cn": [
+        "自顶向下总是更快",
+        "自底向上用递归，自顶向下用迭代",
+        "自顶向下用递归+缓存，自底向上用迭代填表",
+        "两者时间复杂度不同"
+      ]
+    },
+    "answer": 2,
+    "explanation": {
+      "en": "Top-down starts from the problem and recurses down, caching results (memoization). Bottom-up builds from base cases up, filling a table. Same time complexity, but bottom-up avoids recursion stack overhead. Choose based on problem structure and stack limits. Source: Nowcoder TOP101 - Dynamic Programming",
+      "cn": "自顶向下从问题出发递归向下，缓存结果（记忆化）。自底向上从基础情况开始迭代填表。时间复杂度相同，但自底向上避免了递归栈开销。根据问题结构和栈限制选择。来源：牛客 TOP101 - 动态规划"
+    }
+  },
+  {
+    "id": "algo-hash-1",
+    "category": {
+      "en": "Algorithm",
+      "cn": "算法"
+    },
+    "difficulty": "Easy",
+    "question": {
+      "en": "For the 'Two Sum' problem, why is a hash map solution O(n) while the brute force is O(n²)?",
+      "cn": "对于「两数之和」问题，为什么哈希表解法是 O(n) 而暴力解法是 O(n²)？"
+    },
+    "options": {
+      "en": [
+        "Hash maps use less memory",
+        "Hash map lookup is O(1) on average, avoiding nested loops",
+        "Hash maps sort the data automatically",
+        "Brute force has more cache misses"
+      ],
+      "cn": [
+        "哈希表占用内存更少",
+        "哈希表查找平均 O(1)，避免了嵌套循环",
+        "哈希表会自动排序数据",
+        "暴力解法缓存未命中更多"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "Hash magic! Instead of checking every pair (n×n operations), you check if `target - current` exists in the hash map (O(1) lookup). One pass through the array = O(n). This is the 'trade space for time' pattern you'll use everywhere. Source: Nowcoder TOP101 - BM50 两数之和",
+      "cn": "哈希魔法！不用检查每一对（n×n 次操作），只需检查 `target - current` 是否在哈希表中（O(1) 查找）。遍历一次数组 = O(n)。这是「用空间换时间」的经典模式，你会到处用到。来源：牛客 TOP101 - BM50 两数之和"
+    }
+  },
+  {
+    "id": "algo-tree-1",
+    "category": {
+      "en": "Algorithm",
+      "cn": "算法"
+    },
+    "difficulty": "Hard",
+    "question": {
+      "en": "Which traversal order can uniquely reconstruct a binary tree when combined with inorder traversal?",
+      "cn": "哪种遍历顺序与中序遍历结合可以唯一确定一棵二叉树？"
+    },
+    "options": {
+      "en": [
+        "Only preorder",
+        "Only postorder",
+        "Both preorder and postorder",
+        "Neither can reconstruct it"
+      ],
+      "cn": [
+        "只有前序遍历",
+        "只有后序遍历",
+        "前序和后序都可以",
+        "都不能确定"
+      ]
+    },
+    "answer": 2,
+    "explanation": {
+      "en": "Both work! Preorder's first element (or postorder's last) is the root. Find it in inorder to split left/right subtrees, then recurse. But preorder + postorder alone CAN'T reconstruct the tree (ambiguous when a node has only one child). Inorder is the key! Source: Nowcoder TOP101 - Binary Tree Reconstruction",
+      "cn": "都可以！前序的第一个元素（或后序的最后一个）是根节点。在中序中找到它来划分左右子树，然后递归。但前序 + 后序单独组合不能重建（单子节点情况有歧义）。中序是关键！来源：牛客 TOP101 - 重建二叉树"
+    }
+  },
+  {
+    "id": "algo-twopointer-1",
+    "category": {
+      "en": "Algorithm",
+      "cn": "算法"
+    },
+    "difficulty": "Medium",
+    "question": {
+      "en": "In the 'Container With Most Water' problem, why can we safely move the pointer at the shorter line inward?",
+      "cn": "在「盛最多水的容器」问题中，为什么可以安全地移动较短那条线的指针？"
+    },
+    "options": {
+      "en": [
+        "To balance the container",
+        "Moving the taller line would never increase the area",
+        "Moving the shorter line guarantees a larger area",
+        "It's just a heuristic that usually works"
+      ],
+      "cn": [
+        "为了平衡容器",
+        "移动较长的线永远不会增加面积",
+        "移动较短的线保证面积更大",
+        "这只是一个通常有效的启发式方法"
+      ]
+    },
+    "answer": 1,
+    "explanation": {
+      "en": "Greedy insight! Area = min(height) × width. If you move the taller pointer inward, width decreases and height can't increase (still limited by the shorter line). Moving the shorter line is the ONLY way to potentially find a larger area. This greedy choice eliminates O(n) comparisons per step! Source: Nowcoder TOP101 - Two Pointers",
+      "cn": "贪心洞察！面积 = min(高度) × 宽度。如果移动较长的指针，宽度减小而高度不可能增加（仍受较短线限制）。移动较短的线是唯一可能找到更大面积的方式。这个贪心选择每步省去 O(n) 次比较！来源：牛客 TOP101 - 双指针"
+    }
   }
 ]
